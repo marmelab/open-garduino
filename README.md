@@ -3,6 +3,15 @@
 This repository provides all the necessary tools to create an advanced monitoring system for your plantations. Check
 the earth humidity, light reception and temperature to make your green buddies feel much better!
 
+## Circuit
+
+```
++5V |----[TMP36]-----| GND
+            |
+            |
+            A0
+```
+
 ## Server setup
 
 ``` sh
