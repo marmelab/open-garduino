@@ -1,1 +1,6 @@
+.sass-cache/
+
 server/node_modules
+
+ui/bower_components
+ui/style.css

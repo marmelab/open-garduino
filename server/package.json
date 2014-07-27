@@ -1,5 +1,6 @@
 {
     "dependencies": {
-        "johnny-five": "latest"
+        "johnny-five": "latest",
+        "socket.io": "latest"
     }
 }

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Garduino - Plantation gardening monitoring interface powered by Arduino</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Open Garduino</h1>
+        <div class="row-fluid">
+            <div class="col-md-4 temperature">
+                <h2>Temperature</h2>
+                <span class="value">-</span>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="http://192.168.56.101:8080/socket.io/socket.io.js"></script>
+    <script src="js/monitoring.js"></script>
+</body>
+</html>

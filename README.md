@@ -9,3 +9,9 @@ the earth humidity, light reception and temperature to make your green buddies f
 cd server
 sudo npm install
 ```
+
+## Web UI setup
+
+```
+sass ui/sass/style.scss > ui/style.css
+```

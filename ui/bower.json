@@ -1,0 +1,26 @@
+{
+  "name": "open-garduino",
+  "version": "0.3.0",
+  "authors": [
+    "Jonathan Petitcolas <petitcolas.jonathan@gmail.com>"
+  ],
+  "description": "A plantation monitoring interface powered by Arduino.",
+  "keywords": [
+    "arduino",
+    "garden",
+    "d3js",
+    "socketio"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.0.2"
+  }
+}

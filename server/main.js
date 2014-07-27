@@ -1,16 +1,25 @@
+var VOLTAGE = 5;
+
 var five = require('johnny-five');
+var io   = require('socket.io').listen(8080);
 
 var temperatureSensor;
+
+var socket;
 var board = new five.Board();
 
 board.on("ready", function() {
     temperatureSensor = new five.Sensor({
-        pin: "A0"
+        pin: "A0",
+        freq: 5000
     });
 
-    setInterval(function() {
-        console.log("Temperature: " + getTemperature() + "°C");
-    }, 2000);
+    io.sockets.on("connection", function(socket) {
+        console.log("New connection arrived: " + socket.id);
+        temperatureSensor.on("data", function() {
+            socket.emit("temperature", getTemperature());
+        });
+    });
 
     this.repl.inject({
         temperatureSensor: temperatureSensor
@@ -18,5 +27,5 @@ board.on("ready", function() {
 });
 
 function getTemperature() {
-    return Math.round(temperatureSensor.value * (5 / 1023) * 100) - 50;
+    return Math.round(temperatureSensor.value * (VOLTAGE / 1023) * 100) - 50;
 }
