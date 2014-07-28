@@ -2,4 +2,19 @@
 
 .value {
     font-size: 8em;
+    position: absolute;
+    top: 180px;
+    width: 100%;
+    text-align: center;
+}
+
+.temperature {
+    position: relative;
+    .chart {
+        path {
+            stroke: green;
+            stroke-width: 2;
+            fill: none;
+        }
+    }
 }
