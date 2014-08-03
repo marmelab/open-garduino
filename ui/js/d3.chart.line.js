@@ -14,6 +14,12 @@ d3.chart.line = function() {
         .y(function(d) { return y(d.temperature); })
     ;
 
+    var areaFunction = d3.svg.area()
+        .x(function(d, i) { return x(i);})
+        .y0(height)
+        .y1(function(d) { return y(d.temperature); })
+    ;
+
     function chart(selection) {
         x = d3.scale.linear()
             .range([0, width])
@@ -36,7 +42,17 @@ d3.chart.line = function() {
             .data(selection.data())
             .enter()
                 .append("svg:path")
+                .attr("class", "line")
                 .attr("d", lineFunction)
+        ;
+
+        graph
+            .selectAll("path:not(.line)") // Do not overwrite previously created line
+            .data(selection.data())
+            .enter()
+                .append("svg:path")
+                .attr("class", "area")
+                .attr("d", areaFunction)
         ;
     }
 
@@ -47,22 +63,28 @@ d3.chart.line = function() {
             full = true;
         }
 
-        graph.select("path")
+        graph.select("path.line")
             .data([data])
             .attr("d", lineFunction)
             .attr("transform", null)
         ;
 
+        graph.select("path.area")
+            .data([data])
+            .attr("d", areaFunction)
+            .attr("transform", null)
+
+        ;
+
         if (full) {
-            graph.select("path")
+            graph.selectAll("path")
                 .transition()
-                .duration(500)
-                .ease("linear")
-                .attr("transform", "translate(" + x(-1) + ")");
+                    .duration(500)
+                    .ease("linear")
+                    .attr("transform", "translate(" + x(-1) + ")");
 
             data.splice(0, 1);
         }
-
     };
 
     chart.width = function(value) {
