@@ -8,19 +8,28 @@ d3.chart.line = function() {
     var graph;
 
     var x, y;
+
     var lineFunction = d3.svg.line()
-        .x(function(d) { return x(d.datetime); })
+        .x(function(d, i) { return x(i); })
         .y(function(d) { return y(d.temperature); })
     ;
 
     function chart(selection) {
+        x = d3.scale.linear()
+            .range([0, width])
+            .domain([0, maximumDisplayedData])
+        ;
+
+        y = d3.scale.linear()
+            .domain([-10, 40])
+            .range([height, 0])
+        ;
+
         graph = selection.append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
         ;
-
-        updateAxes(selection.datum());
 
         graph
             .selectAll("path")
@@ -31,32 +40,29 @@ d3.chart.line = function() {
         ;
     }
 
-    function updateAxes(data) {
-        x = d3.time.scale()
-            .range([0, width])
-            .domain(d3.extent(data, function(d) {
-                return d.datetime;
-            }))
-        ;
-
-        y = d3.scale.linear()
-            .domain([-10, 40])
-            .range([height, 0])
-        ;
-    }
-
     chart.update = function(selection) {
+        var full = false;
         var data = selection.datum();
         if (data.length > maximumDisplayedData) {
+            full = true;
+        }
+
+        graph.select("path")
+            .data([data])
+            .attr("d", lineFunction)
+            .attr("transform", null)
+        ;
+
+        if (full) {
+            graph.select("path")
+                .transition()
+                .duration(500)
+                .ease("linear")
+                .attr("transform", "translate(" + x(-1) + ")");
+
             data.splice(0, 1);
         }
 
-        updateAxes(data);
-
-        graph.selectAll("path")
-            .data([data])
-            .attr("d", lineFunction)
-        ;
     };
 
     chart.width = function(value) {
@@ -72,6 +78,13 @@ d3.chart.line = function() {
 
         return chart;
     };
+
+    chart.maximumDisplayedData = function(value) {
+        if (!arguments.length) return maximumDisplayedData ;
+        maximumDisplayedData = value;
+
+        return chart;
+    }
 
     return chart;
 }

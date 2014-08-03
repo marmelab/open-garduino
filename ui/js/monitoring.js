@@ -4,7 +4,7 @@ var temperatures = [
     { datetime: new Date(), temperature: 23 }
 ];
 
-var lineChart = d3.chart.line().width(350).height(220);
+var lineChart = d3.chart.line().maximumDisplayedData(10).width(350).height(220);
 
 var temperatureChart = d3.select(".temperature .chart")
     .data([temperatures])
@@ -12,7 +12,7 @@ var temperatureChart = d3.select(".temperature .chart")
 ;
 
 socket.on("temperature", function(value) {
-    temperatures.push({ datetime: new Date(), temperature: value });
+    temperatures.push({ datetime: new Date(), temperature: Math.random() * 40 });//value });
     d3.select(".temperature .chart")
         .data([temperatures])
         .call(lineChart.update)
