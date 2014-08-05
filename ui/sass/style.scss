@@ -1,5 +1,31 @@
 @import "../bower_components/bootstrap-sass/lib/bootstrap";
 
+$temperatureColor: rgb(20, 117, 20);
+
 .value {
-    font-size: 8em;
+    font-size: 3em;
+    position: absolute;
+    top: 0;
+    right: 42px;
+}
+
+.line {
+    stroke-width: 3;
+    fill: none;
+}
+
+.area {
+    stroke-width: 0;
+}
+
+.temperature {
+    position: relative;
+    .chart {
+        .line {
+            stroke: $temperatureColor;
+        }
+        .area {
+            fill: lighten($temperatureColor, 40);
+        }
+    }
 }

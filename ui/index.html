@@ -11,6 +11,7 @@
         <div class="row-fluid">
             <div class="col-md-4 temperature">
                 <h2>Temperature</h2>
+                <div class="chart"></div>
                 <span class="value">-</span>
             </div>
             <div class="col-md-4"></div>
@@ -18,7 +19,9 @@
         </div>
     </div>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
     <script src="http://192.168.56.101:8080/socket.io/socket.io.js"></script>
+    <script src="js/d3.chart.line.js"></script>
     <script src="js/monitoring.js"></script>
 </body>
 </html>

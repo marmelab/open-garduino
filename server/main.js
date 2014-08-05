@@ -11,7 +11,7 @@ var board = new five.Board();
 board.on("ready", function() {
     temperatureSensor = new five.Sensor({
         pin: "A0",
-        freq: 5000
+        freq: 1000
     });
 
     io.sockets.on("connection", function(socket) {
